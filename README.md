@@ -47,10 +47,19 @@
 	- Database: _ancient_rome_ (the name of the real database)
 	- Connection string parameters: _MODE=MySQL_
 7. In the _getEmperors-test-suite_ munit file use the _Global Elements_ tab and create a new Element _Database Config_ with the following values:
-	- Name: ``` Database_Config_MUNIT```
+	- Name: 
+	```
+	Database_Config_MUNIT
+	```
 	- Connection: _Generic Connection_
-	- URL: ```jdbc:h2:tcp://localhost/mem:ancient_rome```
-	- Driver Class name: ```org.h2.Driver```
+	- URL: 
+	```
+	jdbc:h2:tcp://localhost/mem:ancient_rome
+	```
+	- Driver Class name: 
+	```
+	org.h2.Driver
+	```
 7. Create Properties file under src/main/resources/properties.yaml. This is pointing to the real DB server configuration
 ```yaml
 db-config: "Database_Config_MYSQL"
