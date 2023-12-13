@@ -43,9 +43,18 @@
 
 ```
 7. In the _getEmperors-test-suite_ munit file use the _Global Elements_ tab and create a new Element _MUnit DB Server Config_ with the following values:
-	- Csv: _emperors.csv_ (the csv file with the content of your DB)
-	- Database: _ancient_rome_ (the name of the real database)
-	- Connection string parameters: _MODE=MySQL_
+	- Csv: (the csv file with the content of your DB)
+	```
+	emperors.csv
+	``` 
+	- Database: (the name of the real database)
+	```
+	ancient_rome
+	```
+	- Connection string parameters:
+	```
+	MODE=MySQL
+	```
 7. In the _getEmperors-test-suite_ munit file use the _Global Elements_ tab and create a new Element _Database Config_ with the following values:
 	- Name: 
 	```
@@ -64,6 +73,7 @@
 ```yaml
 db-config: "Database_Config_MYSQL"
 ```
+
 8. In the _global.xml_ file create a new Element _Configuration Properites_ pointing to _properties.yaml_
 9. In the _getEmperors-test-suite_ munit file use the _Global Elements_ tab and create a new Element _Configuration Properties_ pointing to _properties-munit.xml_
 8. Create Properties file under src/test/resources/properties-munit.yaml. This is pointing to the Mock DB server configuration
