@@ -1,0 +1,116 @@
+#%RAML 1.0
+title: Roman Emperors API
+version: 1.0
+
+types:
+  RomanEmperor:
+    type: object
+    properties:
+      name: string
+      reign_start: string
+      reign_end: string
+      birth_date: string
+      death_date: string
+      achievements: string
+
+/emperors:
+  get:
+    description: Retrieve a list of all Roman emperors.
+    responses:
+      200:
+        description: Successful response with a list of emperors.
+        body:
+          application/json:
+            example: |
+              [
+                {
+                  "name": "Augustus",
+                  "reign_start": "27 BC",
+                  "reign_end": "14 AD",
+                  "birth_date": "September 23, 63 BC",
+                  "death_date": "August 19, 14 AD",
+                  "achievements": "First Roman Emperor"
+                },
+                {
+                  "name": "Nero",
+                  "reign_start": "October 13, 54 AD",
+                  "reign_end": "June 9, 68 AD",
+                  "birth_date": "December 15, 37 AD",
+                  "death_date": "June 9, 68 AD",
+                  "achievements": "Known for his extravagance and tyranny"
+                }
+              ]
+
+
+  post:
+    description: Create a new Roman emperor record.
+    body:
+      application/json:
+        example: |
+          {
+            "name": "New Emperor",
+            "reign_start": "January 1, 100 AD",
+            "reign_end": "December 31, 150 AD",
+            "birth_date": "January 1, 50 AD",
+            "death_date": "December 31, 200 AD",
+            "achievements": "Notable achievements"
+          }
+    responses:
+      201:
+        description: Successful creation of the new emperor.
+      400:
+        description: Bad request. Invalid input data.
+
+/emperors/{emperorId}:
+  uriParameters:
+    emperorId:
+      description: The ID of the emperor to retrieve.
+      type: integer
+      example: 1
+  get:
+    description: Retrieve details about a specific Roman emperor.
+    responses:
+      200:
+        description: Successful response with the details of the emperor.
+        body:
+          application/json:
+            example: |
+              {
+                "name": "Augustus",
+                "reign_start": "27 BC",
+                "reign_end": "14 AD",
+                "birth_date": "September 23, 63 BC",
+                "death_date": "August 19, 14 AD",
+                "achievements": "First Roman Emperor"
+              }
+      404:
+        description: Emperor not found.
+
+  put:
+    description: Update details of a specific Roman emperor.
+    body:
+      application/json:
+        example: |
+          {
+            "name": "Updated Emperor Name",
+            "reign_start": "January 1, 50 BC",
+            "reign_end": "December 31, 50 AD",
+            "birth_date": "January 1, 1 BC",
+            "death_date": "December 31, 100 AD",
+            "achievements": "Updated achievements"
+          }
+    responses:
+      200:
+        description: Successful update of the emperor details.
+      400:
+        description: Bad request. Invalid input data.
+      404:
+        description: Emperor not found.
+
+  delete:
+    description: Delete a specific Roman emperor.
+    responses:
+      204:
+        description: Successful deletion of the emperor.
+      404:
+        description: Emperor not found.

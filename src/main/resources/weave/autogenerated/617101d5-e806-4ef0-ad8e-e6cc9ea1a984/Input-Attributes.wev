@@ -1,0 +1,23 @@
+%dw 2.0
+
+type auto_617101d5_e806_4ef0_ad8e_e6cc9ea1a984_Input_Attributes = {|
+  clientCertificate?: {|
+    publicKey?: {|  |}, 
+    "type"?: String, 
+    encoded?: Binary
+  |}, 
+  headers: {|  |}, 
+  listenerPath: String, 
+  method: String, 
+  queryParams: {|  |}, 
+  queryString: String, 
+  relativePath: String, 
+  remoteAddress: String, 
+  requestPath: String, 
+  requestUri: String, 
+  scheme: String, 
+  uriParams: {| emperorId: Number |}, 
+  version: String, 
+  localAddress: String
+|}
+
