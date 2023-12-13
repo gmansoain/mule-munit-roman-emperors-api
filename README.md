@@ -8,6 +8,25 @@
 2. Rename the Test Suite to _getEmperors-test-suite.xml_
 3. Rename the Test case to _getEmperorsSuccessTestCase_
 
+### Parametrized the DB Connection
+7. Create Properties file under src/main/resources/properties.yaml. This is pointing to the real DB server configuration
+```yaml
+db-config: "Database_Config_MYSQL"
+```
+8. In the _main.xml_ file go to the _getEmperors_ flow and select the _Select_ processor. With rigth click select the option _Go To XML_ and replace the value _config-ref="Database_Config_MYSQL"_ with:
+```xml
+config-ref="${db-config}"
+```
+9. Run the project and verify the app is deployed and requests are working as expected
+
+10. If you get the error:
+>[ERROR] Failed to execute goal org.mule.tools.maven:mule-maven-plugin:3.8.2:process-classes (default-process-classes) on project mule-munit-roman-emperors-api: Fail to compile: Referenced component '${db-config}' must be one of stereotypes [DB:CONFIG]. -> [Help 1]
+
+Then go to _Run/Run Configuations_ and add the following to the Maven command line arguments:
+```sh
+-DskipAST
+```
+
 ### MUnit DB Server Setup
 4. From the MUnit Test suite add the MUnit DB server from the _Mule Palette_. Search on Exchange
 5. Verify the MUnit DB server has been added as a dependency in the pom file
@@ -17,8 +36,15 @@
 	<artifactId>munit-dbserver-module</artifactId>
 	<version>2.0.2</version>
 	<classifier>mule-plugin</classifier>
+	<scope>test</scope>
 </dependency>
 ```
+If you get the error below when running the project
+>[ERROR] Failed to execute goal org.mule.tools.maven:mule-maven-plugin:3.8.2:validate (default-validate) on project mule-munit-roman-emperors-api: Validation exception: The following dependencies are not allowed unless their scope is [test]: 
+[ERROR] Dependency: com.mulesoft.munit.utils:munit-dbserver-module:2.0.2:jar:mule-plugin should have scope 'test', found 'compile'
+
+Then make sure you add the test scope tag is added to the MUnit DBServer dependency
+
 7. Create a file _emperors.csv_ with the content of your DB under _src/test/resources_. For this project:
 ```csv
 "id","name","reign_start","reign_end","birth_date","death_date","dynasty","other_titles","biography"
@@ -69,19 +95,16 @@
 	```
 	org.h2.Driver
 	```
-7. Create Properties file under src/main/resources/properties.yaml. This is pointing to the real DB server configuration
-```yaml
-db-config: "Database_Config_MYSQL"
-```
 
-8. In the _global.xml_ file create a new Element _Configuration Properites_ pointing to _properties.yaml_
-9. In the _getEmperors-test-suite_ munit file use the _Global Elements_ tab and create a new Element _Configuration Properties_ pointing to _properties-munit.xml_
 8. Create Properties file under src/test/resources/properties-munit.yaml. This is pointing to the Mock DB server configuration
 ```yaml
 db-config: "Database_Config_MUNIT"
 ```
+9. In the _getEmperors-test-suite_ munit file use the _Global Elements_ tab and create a new Element _Configuration Properties_ pointing to _properties-munit.xml_
 
-7. In the testSuite, click on the Global Elements tab and create:
+8. In the _global.xml_ file create a new Element _Configuration Properties_ pointing to _properties.yaml_
+
+
 
 
 
